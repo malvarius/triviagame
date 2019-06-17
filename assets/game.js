@@ -1,5 +1,7 @@
 // i is game question counter
 let i = 0;
+let ansRight = 0;
+let ansWrong = 0;
 
 // creating questions answer pairs
 const questions = [{
@@ -46,45 +48,58 @@ const questions = [{
 // Timer Function
 let timeStart = 30;
 // reset timer function
-const resetTime = function(){
+const resetTime = function () {
     timeStart = 30;
 }
 let timer = function () {
-    // Display time countdown to screen
-    $('#timer').text("Time Remaining on question: "+timeStart+" seconds");
-    if (timeStart>0){
-    timeStart--;
-    }else if (timeStart===0){
+
+    if (timeStart > 0) {
+        timeStart--;
+    } else if (timeStart === 0) {
         resetTime();
         i++
         questDisp(i);
     }
-    
 }
-window.setInterval(timer, 1000);
-
 // displays question to screen
 let questDisp = function (j) {
-    $("#question").text(questions[j].question)
-    $(".answer1").text(questions[j].answers.a)
-    $(".answer2").text(questions[j].answers.b)
-    $(".answer3").text(questions[j].answers.c)
-    $(".answer4").text(questions[j].answers.d)
+    if (j > 3) {
+        $('#timer').text("Game Over!");
+        $("#question").text("Results: ");
+        $(".answer1").text("Correct Answers: "+ansRight);
+        $(".answer2").text("Answers Wrong: "+ansWrong);
+        $(".answer3").text("");
+        $(".answer4").text("");
+
+    } else {
+        // Display time countdown to screen and window setinterval to iterate
+        $('#timer').text("Time Remaining on question: " + timeStart + " seconds");
+        $("#question").text(questions[j].question);
+        $(".answer1").text(questions[j].answers.a);
+        $(".answer2").text(questions[j].answers.b);
+        $(".answer3").text(questions[j].answers.c);
+        $(".answer4").text(questions[j].answers.d);
+    }
 }
-
-
 questDisp(i);
+
+
+window.setInterval(timer, 1000);
+
+
 // on click, checks if answer you clicked is correct or not
 $('.answers').on('click', function () {
     if ($(this).text() === questions[i].correct) {
         alert('correct!');
         resetTime();
-        i++
+        i++;
+        ansRight++;
         questDisp(i);
     } else if ($(this).text() !== questions[i].correct) {
         alert('Wrong!');
         resetTime();
-        i++
+        i++;
+        ansWrong++;
         questDisp(i);
     }
 })
