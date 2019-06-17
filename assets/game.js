@@ -1,5 +1,7 @@
-// creating questions answer pairs
+// i is game question counter
+let i = 0;
 
+// creating questions answer pairs
 const questions = [{
     question: "What is the name of the Orcish Capital?",
     correct: 'Orgrimmar',
@@ -43,31 +45,46 @@ const questions = [{
 ]
 // Timer Function
 let timeStart = 30;
+// reset timer function
+const resetTime = function(){
+    timeStart = 30;
+}
 let timer = function () {
-    timeStart--;
     // Display time countdown to screen
-
-
+    $('#timer').text("Time Remaining on question: "+timeStart+" seconds");
+    if (timeStart>0){
+    timeStart--;
+    }else if (timeStart===0){
+        resetTime();
+        i++
+        questDisp(i);
+    }
+    
 }
 window.setInterval(timer, 1000);
 
 // displays question to screen
-let i = 0;
-let questDisp = function () {
-    $("#question").text(questions[i].question)
-    $(".answer1").text(questions[i].answers.a)
-    $(".answer2").text(questions[i].answers.b)
-    $(".answer3").text(questions[i].answers.c)
-    $(".answer4").text(questions[i].answers.d)
+let questDisp = function (j) {
+    $("#question").text(questions[j].question)
+    $(".answer1").text(questions[j].answers.a)
+    $(".answer2").text(questions[j].answers.b)
+    $(".answer3").text(questions[j].answers.c)
+    $(".answer4").text(questions[j].answers.d)
 }
 
 
-questDisp();
+questDisp(i);
 // on click, checks if answer you clicked is correct or not
 $('.answers').on('click', function () {
-    if ($(this).text() === questions[0].correct) {
+    if ($(this).text() === questions[i].correct) {
         alert('correct!');
-    } else if ($(this).text() !== questions[0].correct) {
+        resetTime();
+        i++
+        questDisp(i);
+    } else if ($(this).text() !== questions[i].correct) {
         alert('Wrong!');
+        resetTime();
+        i++
+        questDisp(i);
     }
 })
