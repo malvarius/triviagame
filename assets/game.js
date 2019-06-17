@@ -52,7 +52,7 @@ const resetTime = function () {
     timeStart = 30;
 }
 let timer = function () {
-
+    $('#timer').text("Time Remaining on question: " + timeStart + " seconds");
     if (timeStart > 0) {
         timeStart--;
     } else if (timeStart === 0) {
@@ -61,9 +61,13 @@ let timer = function () {
         questDisp(i);
     }
 }
+let interval = window.setInterval(timer, 1000);
+
 // displays question to screen
 let questDisp = function (j) {
     if (j > 3) {
+        clearInterval(interval);
+        $('#timer').empty();
         $('#timer').text("Game Over!");
         $("#question").text("Results: ");
         $(".answer1").text("Correct Answers: "+ansRight);
@@ -84,7 +88,7 @@ let questDisp = function (j) {
 questDisp(i);
 
 
-window.setInterval(timer, 1000);
+
 
 
 // on click, checks if answer you clicked is correct or not
