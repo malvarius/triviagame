@@ -35,7 +35,7 @@ const questions = [{
     }
 },
 {
-    question: "What is the druids owl form called?",
+    question: "What is the druid's owl form called?",
     correct: 'Moonkin',
     answers: {
         a: "Owl Form",
@@ -43,8 +43,21 @@ const questions = [{
         c: "Evertree",
         d: "Murloc"
     }
+},
+    {
+        question: "What is the coolest race?",
+        correct: 'Tauren',
+        answers: {
+            a: 'Tauren',
+            b: 'Tauren',
+            c: 'Tauren',
+            d: 'Tauren'
+        }
 }
 ]
+// const of array length
+const length = questions.length-1;
+console.log(length);
 // Timer Function
 let timeStart = 30;
 // reset timer function
@@ -66,8 +79,8 @@ let interval = window.setInterval(timer, 1000);
 
 // displays question to screen
 const questDisp = function (j) {
-    // if j>3 checks length of question array, if were past the last question it displays results of quiz
-    if (j > 3) {
+    // if j>length checks length of question array, if were past the last question it displays results of quiz
+    if (j > length) {
         clearInterval(interval);
         $('#timer').empty();
         stop()
