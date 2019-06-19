@@ -55,16 +55,17 @@ let timer = function () {
     $('#timer').text("Time Remaining on question: " + timeStart + " seconds");
     if (timeStart > 0) {
         timeStart--;
-    } else if (timeStart === 0) {
+    } else if (timeStart === 0 && i<4) {
         resetTime();
         i++
+        ansWrong++
         questDisp(i);
     }
 }
 let interval = window.setInterval(timer, 1000);
 
 // displays question to screen
-let questDisp = function (j) {
+const questDisp = function (j) {
     // if j>3 checks length of question array, if were past the last question it displays results of quiz
     if (j > 3) {
         clearInterval(interval);
@@ -90,7 +91,7 @@ let questDisp = function (j) {
 questDisp(i);
 // Stop function
 
-let stop = function(){
+const stop = function(){
     clearTimeout(interval);
     timeStart=30;
 };
@@ -102,7 +103,7 @@ let stop = function(){
 $('.answers').on('click', function () {
     stop();
     $('#timer').empty();
-
+// correct answer says GJ and resets interval
     if ($(this).text() === questions[i].correct) {
          $('#timer').text("Correct Answer!");
         $("#question").text("Good Job!");
@@ -111,13 +112,15 @@ $('.answers').on('click', function () {
         $(".answer3").text("");
         $(".answer4").text("");
         i++
-        setTimeout(function(){
+        const timeout = setTimeout(function(){
             resetTime();
-            setInterval(timer,1000);
+          interval = setInterval(timer,1000);
             ansRight++;
             questDisp(i);
+            clearTimeout(timeout);
         },4000)
-        
+
+        // incorrect question displays correct answer and resets timer and interval
     } else if ($(this).text() !== questions[i].correct) {
          $('#timer').html("Wrong Answer!");
         $("#question").text("The horde does not welcome you!");
@@ -126,12 +129,13 @@ $('.answers').on('click', function () {
         $(".answer3").text("");
         $(".answer4").text("");
         
-        setTimeout(function(){
+       const timeout = setTimeout(function(){
             i++
             resetTime();
-            setInterval(timer,1000);
+            interval = setInterval(timer,1000);
             ansWrong++;
             questDisp(i);
+            clearTimeout(timeout)
             
         },4000)
     }
