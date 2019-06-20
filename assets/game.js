@@ -7,6 +7,7 @@ let ansWrong = 0;
 const questions = [{
     question: "What is the name of the Orcish Capital?",
     correct: 'Orgrimmar',
+    image: $("<img id ='correctPic'>").attr('src','./assets/org.jpg'),
     answers: {
         a: "Zandalar",
         b: "Undercity",
@@ -17,6 +18,7 @@ const questions = [{
 {
     question: "What is the tallest Wow Race?",
     correct: 'Troll',
+    image: $("<img id ='correctPic'>").attr('src','./assets/troll.jpg'),
     answers: {
         a: "Orc",
         b: "Night Elf",
@@ -27,6 +29,7 @@ const questions = [{
 {
     question: "Who developed WoW?",
     correct: 'Blizzard',
+    image: $("<img id ='correctPic'>").attr('src','./assets/blizz.jpg'),
     answers: {
         a: "Blizzard",
         b: "Activision",
@@ -37,6 +40,7 @@ const questions = [{
 {
     question: "What is the druid's owl form called?",
     correct: 'Moonkin',
+    image: $("<img id ='correctPic'>").attr('src','./assets/moon.jpg'),
     answers: {
         a: "Owl Form",
         b: "Moonkin",
@@ -88,7 +92,7 @@ const questDisp = function (j) {
         $("#question").text("Results: ");
         $(".answer1").text("Correct Answers: "+ansRight);
         $(".answer2").text("Answers Wrong: "+ansWrong);
-        $(".answer3").text("");
+        $(".answer3").text("Play Again!!!");
         $(".answer4").text("");
 
     } else {
@@ -116,8 +120,12 @@ const stop = function(){
 $('.answers').on('click', function () {
     stop();
     $('#timer').empty();
-// correct answer says GJ and resets interval
-    if ($(this).text() === questions[i].correct) {
+
+if($(this).text() === "Play Again!!!"){
+    // if user clicks play again, reloads page
+    location.reload();
+}else if ($(this).text() === questions[i].correct) {
+    // correct answer says GJ and resets interval
          $('#timer').text("Correct Answer!");
         $("#question").text("Good Job!");
         $(".answer1").text("");
@@ -138,7 +146,8 @@ $('.answers').on('click', function () {
          $('#timer').html("Wrong Answer!");
         $("#question").text("The horde does not welcome you!");
         $(".answer1").text("Correct Answer was: "+questions[i].correct);
-        $(".answer2").text("");
+        $(".answer2").empty();
+        $(".answer2").append(questions[i].image);
         $(".answer3").text("");
         $(".answer4").text("");
         

@@ -80,3 +80,9 @@ body{
 #question{
     color: orange;
 }
+#correctPic{
+    border-color: red;
+    border-style: groove;
+    border-width: 5px;
+    border-radius: 10px;
+}
