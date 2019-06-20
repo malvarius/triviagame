@@ -1,4 +1,4 @@
-// i is game question counter
+// i is game question counter ansRight and wrong are counters
 let i = 0;
 let ansRight = 0;
 let ansWrong = 0;
@@ -79,9 +79,10 @@ let timer = function () {
         questDisp(i);
     }
 }
+// sets original interval of function 'timer' saved as variable
 let interval = window.setInterval(timer, 1000);
 
-// displays question to screen
+// function displays question to screen
 const questDisp = function (j) {
     // if j>length checks length of question array, if were past the last question it displays results of quiz
     if (j > length) {
@@ -105,9 +106,9 @@ const questDisp = function (j) {
         $(".answer4").text(questions[j].answers.d);
     }
 }
+// running the function questDisp of count i, all questions and related answers are based on counter i
 questDisp(i);
 // Stop function
-
 const stop = function(){
     clearTimeout(interval);
     timeStart=30;
