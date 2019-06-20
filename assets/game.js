@@ -1,3 +1,4 @@
+var game = function(){
 // i is game question counter ansRight and wrong are counters
 let i = 0;
 let ansRight = 0;
@@ -127,12 +128,13 @@ if($(this).text() === "Play Again!!!"){
     location.reload();
 }else if ($(this).text() === questions[i].correct) {
     // correct answer says GJ and resets interval
-         $('#timer').text("Correct Answer!");
+         $('#timer').html("Correct Answer!");
         $("#question").text("Good Job!");
-        $(".answer1").text("");
-        $(".answer2").text("");
-        $(".answer3").text("");
-        $(".answer4").text("");
+        $(".answer1").empty();
+        $(".answer2").empty();
+        $(".answer2").append(questions[i].image);
+        $(".answer3").empty();
+        $(".answer4").empty();
         i++
         const timeout = setTimeout(function(){
             resetTime();
@@ -163,3 +165,12 @@ if($(this).text() === "Play Again!!!"){
         },4000)
     }
 })
+}
+
+$('#timer').html("Press Spacebar to begin!");
+
+document.onkeyup = function(e){
+    if (e.key===' '){
+        game();
+    }
+}
