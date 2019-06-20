@@ -19,7 +19,7 @@ const questions = [{
 {
     question: "What is the tallest Wow Race?",
     correct: 'Troll',
-    image: $("<img id ='correctPic'>").attr('src','./assets/troll.jpg'),
+    image: $("<img id ='correctPic'>").attr('src','./assets/troll.gif'),
     answers: {
         a: "Orc",
         b: "Night Elf",
@@ -41,7 +41,7 @@ const questions = [{
 {
     question: "What is the druid's owl form called?",
     correct: 'Moonkin',
-    image: $("<img id ='correctPic'>").attr('src','./assets/moon.jpg'),
+    image: $("<img id ='correctPic'>").attr('src','./assets/moon.gif'),
     answers: {
         a: "Owl Form",
         b: "Moonkin",
@@ -52,6 +52,7 @@ const questions = [{
     {
         question: "What is the coolest race?",
         correct: 'Tauren',
+        image: $("<img id ='correctPic'>").attr('src','./assets/tauren.gif'),
         answers: {
             a: 'Tauren',
             b: 'Tauren',
