@@ -1,3 +1,4 @@
+// everything is stored within a function to run on spacebar key press (see bottom of code for function callout)
 var game = function(){
 // i is game question counter ansRight and wrong are counters
 let i = 0;
@@ -169,7 +170,8 @@ if($(this).text() === "Play Again!!!"){
 }
 
 $('#timer').html("Press Spacebar to begin!");
-
+// on spacebar press starts game, also timer displays "press spacebar to begin"
+// until game is started
 document.onkeyup = function(e){
     if (e.key===' '){
         game();
