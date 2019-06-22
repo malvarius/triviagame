@@ -75,11 +75,26 @@ let timer = function () {
     $('#timer').text("Time Remaining on question: " + timeStart + " seconds");
     if (timeStart > 0) {
         timeStart--;
-    } else if (timeStart === 0 && i<4) {
-        resetTime();
-        i++
-        ansWrong++
-        questDisp(i);
+        // if time is out and we are less than total length of array adds 1 to wrong answer and tells
+        // user correct answers
+    } else if (timeStart === 0 && i<length) {
+        $('#timer').html("You didn't answer!");
+        $("#question").text("The horde does not welcome you!");
+        $(".answer1").text("Correct Answer was: "+questions[i].correct);
+        $(".answer2").empty();
+        $(".answer2").append(questions[i].image);
+        $(".answer3").text("");
+        $(".answer4").text("");
+        stop();
+        const timeout = setTimeout(function(){
+            i++
+            resetTime();
+            interval = setInterval(timer,1000);
+            ansWrong++
+            questDisp(i);
+            clearTimeout(timeout)
+        },4000)
+       
     }
 }
 // sets original interval of function 'timer' saved as variable
